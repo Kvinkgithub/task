@@ -1,21 +1,20 @@
-list1=[]
-a=1
-user_count=int(input("Введите кол-во чисел:  "))
-while a==1:
-    if user_count > 1000:
-        print("нужно кол-во чисел не больше 1000!")
-        break
-    for i in range(1,user_count+1):
-        user_number = (input(f"Введите {i} число (надо минимум 1 число оконч. на 4):  "))
-        if int(user_number) > 30000:
-            print("Нельзя писать числа больше 30000!")
-            break
-        if int(user_number) % 10 == 4:
-            list1.append(user_number)
-    sort_list1=sorted(list1)
-    print(f'Минимальное число оканчивающиеся на 4 это: {sort_list1[:1]}')
-
-    a-=1
+# list1=[]
+# a=1
+# user_count=int(input("Введите кол-во чисел:  "))
+# while a==1:
+#     if user_count > 1000:
+#         print("нужно кол-во чисел не больше 1000!")
+#         break
+#     for i in range(1,user_count+1):
+#         user_number = (input(f"Введите {i} число (надо минимум 1 число оконч. на 4):  "))
+#         if int(user_number) > 30000:
+#             print("Нельзя писать числа больше 30000!")
+#             break
+#         if int(user_number) % 10 == 4:
+#             list1.append(user_number)
+#     sort_list1=sorted(list1)
+#     print(f'Минимальное число оканчивающиеся на 4 это: {sort_list1[:1]}')
+#     a-=1
 
 #Задача 2
 
@@ -69,3 +68,94 @@ while a==1:
 #     if i == "*" or i == ":" or i == ';':
 #         count+=1
 # print(f'В массиве количество символов : , ; , * : {count}')
+
+import  random
+class Warrior:
+    def __init__(self, name_warrior, health, location, item):
+        self.name_warrior = name_warrior
+        self.health = health  # 100
+        self.location = location
+        self.item = item
+
+    def get_damage(self, damage):
+        """Получение урона"""
+        self.health -= damage
+        print(f'{self.name_warrior} получает {damage} урона. Осталось здоровья: {self.health}')
+
+    def use_item(self):
+        global heal_used
+        global otkup_used
+        if self.item == 'Зелье здоровья' and not heal_used:
+            for i in range(1):
+                if self.health <= 90:
+                    self.health += 10
+                    heal_used = True
+                    print('Вы использовали зелье и восстановили 10 HP')
+        if self.item == 'Горсть монет' and not otkup_used:
+            item_choice = input('Хочешь откупиться от удара в этом ходу? y/n : ')
+            if item_choice == 'y':
+                global otkup_available
+                otkup_available = True
+                otkup_used = True
+                print('Вы откупились от удара!')
+
+White_warrior = Warrior('ВОИН Света', 100, 'Светлая сторона', 'none')
+Dark_warrior = Warrior('ВОИН Тьмы', 100, 'Тёмная сторона', 'none')
+
+game_over1 = False
+otkup_available = False
+otkup_used = False
+heal_used = False
+
+def attaka_White():
+    global game_over1
+    White_warrior.use_item()
+    a = random.randint(6, 10)
+    if a >= Dark_warrior.health:
+        print(f'{Dark_warrior.name_warrior} вмэр')
+        game_over1 = True
+        return
+    Dark_warrior.get_damage(a)
+
+def attaka_Dark():
+    global game_over1
+    global otkup_available
+    if otkup_available:
+        print("Вас не ударили из-за откупа!")
+        otkup_available = False
+        return
+    a = random.randint(6, 10)
+    if a >= White_warrior.health:
+        print(f'{White_warrior.name_warrior} вмэр')
+        game_over1 = True
+        return
+    White_warrior.get_damage(a)
+
+def menu():
+    global White_warrior
+    print('Магаз')
+    print('1-Щит(30% шанс отразить удар) \n2-Зелье востоновления здоровья(Востонавливает 10хп)\n3-Кубик D20(Если выпадет число больше 10,врагу наносится 10 урона,если же меньше 10 то наносится тебе\n4-Горсть монет(Воин может откупится от 1 атаки)')
+    user_choice = int(input('Введите число желаемого предмета: '))
+    if user_choice == 1:
+        White_warrior = Warrior('ВОИН Света', 100, 'Светлая сторона', 'Щит')
+        print('Вы взяли Щит')
+    if user_choice == 2:
+        White_warrior = Warrior('ВОИН Света', 100, 'Светлая сторона', 'Зелье здоровья')
+        print('Вы взяли Зелье здоровья')
+    if user_choice == 3:
+        White_warrior = Warrior('ВОИН Света', 100, 'Светлая сторона', 'Кубик D20')
+        print('Вы взяли Кубик D20')
+    if user_choice == 4:
+        White_warrior = Warrior('ВОИН Света', 100, 'Светлая сторона', 'Горсть монет')
+        print('Вы взяли Горсть монет')
+
+print('GAME COOL\nВы играете за светлую сторону\n')
+menu()
+while not game_over1:
+    attaka_White()
+    if game_over1:
+        break
+
+    attaka_Dark()
+    if game_over1:
+        break
