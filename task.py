@@ -158,4 +158,45 @@ while not game_over1:
 
     attaka_Dark()
     if game_over1:
+
         break
+
+
+text = '"Не верю77! ск431аза7л" - К. Стани57славский'
+summa = 0
+text_no_digits = ""
+
+# Считаем цифры и убираем их
+for simvol in text:
+    if simvol.isdigit():
+        summa += int(simvol)
+    else:
+        text_no_digits += simvol
+
+# Делаем текст в кавычках заглавными
+result = ""
+in_quotes = False  # начинаем снаружи кавычек
+
+for simvol in text_no_digits:
+    if simvol == '"':
+        # Проверяем,где мы сейчас
+        if in_quotes == True:  # если уже внутри кавычек
+            in_quotes = False  # выходим
+        else:  # если снаружи кавычек
+            in_quotes = True  # входим
+        result += simvol  # добавляем кавычку
+
+    # Если мы внутри кавычек
+    elif in_quotes == True:
+        if simvol.isalpha():
+            result += simvol.upper()
+        else:
+            result += simvol  # иначе оставляем как есть
+
+    # Если снаружи кавычек
+    else:
+        result += simvol
+
+# Результат
+print(result)
+print(f"\nСумма всех цифр: {summa}")
