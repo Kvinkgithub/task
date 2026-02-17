@@ -44,8 +44,11 @@ not_zero = Point(1,0)
 print(f"zero: {bool(zero)}")      # False
 print(f"not_zero: {bool(not_zero)}")  # True
 
+if not_zero:
+    print("Точка не нулевая") 
 
-
+if zero:
+    print("Это не выведется")
 
 # list1=[]
 # a=1
@@ -249,5 +252,6 @@ for simvol in text_no_digits:
 # Результат
 print(result)
 print(f"\nСумма всех цифр: {summa}")
+
 
 
