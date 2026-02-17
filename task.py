@@ -3,7 +3,7 @@ class Point:
         self.x = x
         self.y = y
     
-    # Для +=
+    # Для +=,обычный add надо сощдавать новую переменную,с i она перезаписывается
     def __iadd__(self, other):
         self.x += other.x
         self.y += other.y
@@ -249,4 +249,5 @@ for simvol in text_no_digits:
 # Результат
 print(result)
 print(f"\nСумма всех цифр: {summa}")
+
 
