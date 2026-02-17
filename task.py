@@ -1,3 +1,52 @@
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    # Для +=
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        return self
+    
+    # Для ==
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    # Для if point:
+    def __bool__(self):
+        return self.x != 0 or self.y != 0
+    
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
+
+points = [Point(1,2), Point(3,4), Point(5,6)]
+
+# Сумма
+total = Point(0,0)
+for i in points:
+    total += i
+print(f"Сумма: {total}") 
+
+# Сравнение
+p1 = Point(2,3)
+p2 = Point(2,3)
+p3 = Point(4,5)
+
+print(f"p1 == p2: {p1 == p2}")  # True
+print(f"p1 == p3: {p1 == p3}")  # False
+
+# Проверка на ноль
+zero = Point(0,0)
+not_zero = Point(1,0)
+
+print(f"zero: {bool(zero)}")      # False
+print(f"not_zero: {bool(not_zero)}")  # True
+
+
+
+
 # list1=[]
 # a=1
 # user_count=int(input("Введите кол-во чисел:  "))
@@ -200,3 +249,4 @@ for simvol in text_no_digits:
 # Результат
 print(result)
 print(f"\nСумма всех цифр: {summa}")
+
