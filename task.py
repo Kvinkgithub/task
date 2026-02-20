@@ -1,3 +1,31 @@
+class Box:
+    def __init__(self, items):
+        self.items = items 
+
+    def __len__(self):
+        print(f"👉 Вызван __len__, предметов: {len(self.items)}")
+        return len(self.items)
+
+
+full_box = Box(["яблоко", "книга", "ручка"])
+empty_box = Box([])
+
+
+if full_box:
+    print("Коробка полная\n")
+
+if empty_box:
+    print("В коробке что-то есть")
+else:
+    print("Коробка пустая")
+
+
+
+
+
+
+
+
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -252,6 +280,7 @@ for simvol in text_no_digits:
 # Результат
 print(result)
 print(f"\nСумма всех цифр: {summa}")
+
 
 
 
