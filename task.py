@@ -3,7 +3,7 @@ class Box:
         self.items = items 
 
     def __len__(self):
-        print(f"👉 Вызван __len__, предметов: {len(self.items)}")
+        print(f"Предметов: {len(self.items)}")
         return len(self.items)
 
 
@@ -280,6 +280,7 @@ for simvol in text_no_digits:
 # Результат
 print(result)
 print(f"\nСумма всех цифр: {summa}")
+
 
 
 
